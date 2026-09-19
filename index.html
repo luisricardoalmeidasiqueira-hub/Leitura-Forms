@@ -34,9 +34,7 @@ button{border:0;border-radius:12px;min-height:44px;padding:0 15px;font-weight:70
 .blue{background:#2475dc;color:white}.orange{background:#ed9700;color:white}.gray{background:#66727a;color:white}
 .message{font-size:13px;margin-top:10px;min-height:18px;color:var(--green2);font-weight:700}
 .toolbar{display:flex;gap:9px;flex-wrap:wrap;align-items:center}.toolbar input{flex:1;min-width:190px}
-.stagebar{display:flex;gap:7px;overflow-x:auto;padding-bottom:5px;margin-bottom:13px}
-.stagebar button{min-width:55px;padding:0 11px;background:#edf3f0;color:var(--green)}
-.stagebar button.active{background:var(--green);color:white}
+
 .stage-title{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-bottom:10px}
 .stage-title h2{margin:0}.badge{background:var(--light);color:var(--green);border-radius:999px;padding:6px 10px;font-size:12px;font-weight:700}
 .tablewrap{overflow:auto;border:1px solid var(--border);border-radius:13px}
@@ -57,6 +55,11 @@ footer{text-align:center;color:#83918c;font-size:11px;padding:8px 0 25px}
   main{max-width:none;padding:0}.tablewrap{overflow:visible}
   table{min-width:0;font-size:11px}
 }
+
+.stagefilter{margin-bottom:14px}
+.stagefilter label{display:block;margin:0 0 6px;font-size:12px;color:var(--muted);font-weight:700}
+.stagefilter select{height:46px;width:100%;border:1px solid #cfdcd6;border-radius:12px;background:#edf7f2;color:var(--green);font-size:16px;font-weight:800;padding:0 13px}
+.stagefilter select:focus{border-color:var(--green2);box-shadow:0 0 0 3px rgba(11,122,75,.1)}
 </style>
 
 <style>
@@ -113,7 +116,29 @@ footer{text-align:center;color:#83918c;font-size:11px;padding:8px 0 25px}
   </section>
 
   <section class="card">
-    <div class="stagebar" id="stagebar"></div>
+    <div class="stagefilter">
+      <label for="etapaFiltro">📍 Etapa para acompanhar</label>
+      <select id="etapaFiltro" onchange="mudarEtapa(this.value)">
+        <option value="1">Etapa 1</option>
+        <option value="2">Etapa 2</option>
+        <option value="3">Etapa 3</option>
+        <option value="4">Etapa 4</option>
+        <option value="5">Etapa 5</option>
+        <option value="6">Etapa 6</option>
+        <option value="7">Etapa 7</option>
+        <option value="8">Etapa 8</option>
+        <option value="9">Etapa 9</option>
+        <option value="10">Etapa 10</option>
+        <option value="11">Etapa 11</option>
+        <option value="12">Etapa 12</option>
+        <option value="13">Etapa 13</option>
+        <option value="14">Etapa 14</option>
+        <option value="15">Etapa 15</option>
+        <option value="16">Etapa 16</option>
+        <option value="17">Etapa 17</option>
+        <option value="18">Etapa 18</option>
+      </select>
+    </div>
     <div class="stage-title"><h2 id="stageHeading">Etapa 1</h2><span class="badge" id="stageCount">0 registros</span></div>
     <div class="tablewrap">
       <table>
