@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="theme-color" content="#2f7a4f">
 <meta name="apple-mobile-web-app-capable" content="yes">
-<title>Leitura Forms</title>
+<title>Situação Medidor</title>
 <style>
 :root{--bg:#f7fbf8;--panel:#fff;--panel2:#f1f7f3;--line:#d7e8dc;--text:#163422;--muted:#5c7864;--green:#2f7a4f;--green2:#24814f;--red:#c85a40;--amber:#b8912e;--gray:#8a978f}
 *{box-sizing:border-box}html,body{margin:0;padding:0;background:var(--bg);color:var(--text);font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
@@ -56,7 +56,7 @@ input:focus,textarea:focus,select:focus{border-color:var(--green);box-shadow:0 0
   <div class="forms-brand">
     <div class="forms-logo">📋</div>
     <div>
-      <div class="forms-title">Leitura Forms</div>
+      <div class="forms-title">Situação Medidor</div>
       <div class="forms-subtitle">Acompanhamento de Leituras</div>
     </div>
   </div>
@@ -145,7 +145,7 @@ $('situacao').addEventListener('change',e=>setSituation(e.target.value));
 $('addReading').onclick=()=>{readings.push('');renderReadings()};
 $('photoBtn').onclick=()=>$('photoInput').click();$('photoInput').onchange=e=>addPhotos(e.target.files);$('exportBtn').onclick=exportCSV;
 $('shareTopBtn').onclick=async()=>{
-  const shareData={title:'Leitura Forms',text:'Acesse o aplicativo Leitura Forms.',url:window.location.href};
+  const shareData={title:'Situação Medidor',text:'Acesse o aplicativo Situação Medidor.',url:window.location.href};
   try{
     if(navigator.share){await navigator.share(shareData);return}
     if(navigator.clipboard && window.isSecureContext){
