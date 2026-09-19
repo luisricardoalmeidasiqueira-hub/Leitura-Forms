@@ -1,0 +1,20 @@
+{
+  "name": "Medidor Situação de Campo",
+  "short_name": "Medidor Situação",
+  "description": "Aplicativo para acompanhamento de situações de medidores em campo.",
+  "lang": "pt-BR",
+  "start_url": "./index.html",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#004d31",
+  "theme_color": "#0b6b43",
+  "icons": [
+    {
+      "src": "capa.png",
+      "sizes": "any",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}
