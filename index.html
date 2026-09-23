@@ -83,8 +83,9 @@ display:flex;align-items:center;justify-content:center;gap:4px;padding:0 5px
 .action-btn:nth-child(1){grid-column:span 2}
 .action-btn:nth-child(2){grid-column:span 2}
 .action-btn:nth-child(3){grid-column:span 2}
-.action-btn:nth-child(4){grid-column:span 3}
-.action-btn:nth-child(5){grid-column:span 3}
+.action-btn:nth-child(4){grid-column:span 2}
+.action-btn:nth-child(5){grid-column:span 2}
+.action-btn:nth-child(6){grid-column:span 2}
 .action-icon{font-size:18px;line-height:1}
 .save-action{background:var(--blue);border-color:var(--blue);color:#fff}
 .photo-action{background:#edf6fd}
@@ -168,6 +169,7 @@ border-radius:14px;padding:11px;margin-bottom:8px}
 <button class="action-btn photo-action" id="galleryBtn" type="button" title="Escolher da galeria"><span class="action-icon">🖼️</span>Galeria</button>
 <button class="action-btn" id="exportBtn" type="button" title="Exportar CSV"><span class="action-icon">📄</span>CSV</button>
 <button class="action-btn" id="shareBtn" type="button" title="Compartilhar aplicativo"><span class="action-icon">↗️</span>Compartilhar</button>
+<button class="action-btn" id="updateBtn" type="button" title="Atualizar aplicativo"><span class="action-icon">🔄</span>Atualizar</button>
 </div>
 <div class="status" id="status"></div>
 </section>
@@ -182,13 +184,15 @@ border-radius:14px;padding:11px;margin-bottom:8px}
 
 <footer class="footer">
 <div>Desenvolvido por Luís Ricardo de Almeida Siqueira</div>
-<div class="version">Versão 1.1 · 23/09/2026</div>
+<div class="version" id="versionTag"></div>
 <div class="copyright">© 2026 Luís Ricardo de Almeida Siqueira — Todos os direitos reservados.</div>
 </footer>
 </main>
 
 <script>
 /* IMPORTANTE: chave preservada para não perder os dados existentes. */
+/* Aumente a versão a cada alteração enviada ao GitHub */
+const APP_VERSION='1.2',APP_DATE='23/09/2026';
 const KEY='situacao-medidor-entries-v2';
 let entries=[],selectedSituacao='',selectedFotos=[],readings=[''],stage=1;
 const $=id=>document.getElementById(id),stages=Array.from({length:18},(_,i)=>i+1);
@@ -329,6 +333,26 @@ $('photoInput').onchange=e=>{
 $('exportBtn').onclick=exportCSV;
 $('shareBtn').onclick=shareApp;
 
+/* Atualizar: busca a versão publicada sem cache e recarrega se houver nova */
+async function updateApp(){
+ const st=$('status');st.style.color='var(--blue)';st.textContent='Verificando atualização...';
+ try{
+  const base=location.href.split('?')[0].split('#')[0];
+  const res=await fetch(base+'?check='+Date.now(),{cache:'no-store'});
+  if(!res.ok)throw new Error('http');
+  const html=await res.text(),m=html.match(/APP_VERSION='([^']+)'/),online=m?m[1]:null;
+  if(online&&online!==APP_VERSION){
+   st.textContent=`Nova versão ${online} encontrada. Atualizando...`;
+   setTimeout(()=>location.replace(base+'?v='+Date.now()),600);
+  }else{
+   st.textContent=`Você já está na versão mais recente (${APP_VERSION}).`;
+  }
+ }catch(e){
+  st.textContent='Sem conexão. Tente atualizar de novo com internet.';st.style.color='var(--red)';
+ }
+}
+$('updateBtn').onclick=updateApp;
+
 $('saveBtn').onclick=()=>{
  const codigo=$('codigo').value.trim(),medidor=$('medidor').value.trim(),
  leituras=readings.map(x=>x.trim()).filter(Boolean);
@@ -346,6 +370,7 @@ $('saveBtn').onclick=()=>{
  $('status').textContent=`Registro salvo na Etapa ${stage}.`;$('status').style.color='var(--blue)'
 };
 
+$('versionTag').textContent=`Versão ${APP_VERSION} · ${APP_DATE}`;
 loadData();renderStages();renderReadings();$('data').value=todayStr();renderRecords();
 </script>
 </body>
